@@ -1,0 +1,8 @@
+{
+  "name": "MyFirstIonicApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite",
+  "id": "70125099"
+}
