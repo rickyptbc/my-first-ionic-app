@@ -10,9 +10,10 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
+  useIonRouter,
   useIonViewWillEnter,
 } from "@ionic/react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   eye,
   eyeOff,
@@ -24,12 +25,21 @@ import {
 } from "ionicons/icons";
 
 const LoginPage: React.FC = () => {
+  const [introSeen, setIntroSeen] = useState(false);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const passwordRef = useRef<HTMLIonInputElement>(null);
+
+  const router = useIonRouter();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
+    // Focus on the password field after toggling show/hide
+    if (passwordRef.current) {
+      passwordRef.current.setFocus();
+    }
   };
 
   const doLogin = (event: React.FormEvent<HTMLFormElement>) => {
@@ -39,6 +49,8 @@ const LoginPage: React.FC = () => {
     setEmail("");
     setPassword("");
     setShowPassword(false);
+
+    // router.push("/home", "root");
   };
 
   useIonViewWillEnter(() => {
@@ -52,7 +64,7 @@ const LoginPage: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar color="primary">
-          <IonTitle>Login Page</IonTitle>
+          <IonTitle>Login</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
@@ -78,6 +90,7 @@ const LoginPage: React.FC = () => {
                 fill="outline"
                 value={password}
                 onIonChange={(e) => setPassword(e.detail.value!)}
+                ref={passwordRef}
               >
                 <IonButton
                   fill="clear"
