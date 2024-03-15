@@ -3,6 +3,7 @@ import {
   IonCardContent,
   IonCardHeader,
   IonContent,
+  IonDatetimeButton,
   IonHeader,
   IonInput,
   IonPage,
@@ -17,20 +18,25 @@ const Tab1: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Tab 1</IonTitle>
+          <IonTitle>Login Form</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">Tab 1</IonTitle>
+            <IonTitle size="large">Login Form</IonTitle>
           </IonToolbar>
         </IonHeader>
         <ExploreContainer name="Tab 1 page" />
         <IonCard>
           <IonCardHeader>Card Header</IonCardHeader>
           <IonCardContent>
-            <IonInput type="email" label="Email" />
+            <IonInput
+              type="email"
+              label="Email"
+              labelPlacement="floating"
+              color="danger"
+            />
           </IonCardContent>
         </IonCard>
       </IonContent>
