@@ -107,7 +107,8 @@ const LoginPage: React.FC = () => {
               </IonInput>
 
               <IonButton
-                type="submit"
+                routerLink="/app"
+                type="button"
                 expand="block"
                 className="ion-margin-top"
               >

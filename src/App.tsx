@@ -47,8 +47,7 @@ const App: React.FC = () => (
         <Route path="/register">
           <RegisterPage />
         </Route>
-        {/* <Route component={Register} path="/register" exact /> */}
-        {/* <Route component={Menu} path="/app" /> */}
+        <Route component={Tab1} path="/app" />
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
