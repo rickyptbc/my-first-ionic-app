@@ -2,6 +2,7 @@ import {
   IonButton,
   IonCard,
   IonCardContent,
+  IonCardTitle,
   IonContent,
   IonFab,
   IonHeader,
@@ -23,6 +24,7 @@ import {
   mailOutline,
   personCircleOutline,
 } from "ionicons/icons";
+import { Geolocation } from '@capacitor/geolocation';
 
 const LoginPage: React.FC = () => {
   const [introSeen, setIntroSeen] = useState(false);
@@ -30,9 +32,19 @@ const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [coordinates, setCoordinates] = useState('-');
+
   const passwordRef = useRef<HTMLIonInputElement>(null);
 
   const router = useIonRouter();
+
+  const printCurrentPosition = async () => {
+    const coordinates = await Geolocation.getCurrentPosition();
+
+    setCoordinates(`Current position: ${coordinates}`)
+  
+    console.log('Current position:', coordinates);
+  };
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -40,6 +52,7 @@ const LoginPage: React.FC = () => {
     if (passwordRef.current) {
       passwordRef.current.setFocus();
     }
+    printCurrentPosition();
   };
 
   const doLogin = (event: React.FormEvent<HTMLFormElement>) => {
@@ -69,6 +82,9 @@ const LoginPage: React.FC = () => {
       </IonHeader>
       <IonContent>
         <IonCard>
+          <IonCardTitle>
+            {coordinates}
+          </IonCardTitle>
           <IonCardContent>
             <form onSubmit={doLogin}>
               <IonInput
