@@ -32,7 +32,7 @@ const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [coordinates, setCoordinates] = useState('-');
+  const [coordinates, setCoordinates] = useState(`Current position: -`);
 
   const passwordRef = useRef<HTMLIonInputElement>(null);
 
@@ -41,7 +41,7 @@ const LoginPage: React.FC = () => {
   const printCurrentPosition = async () => {
     const coordinates = await Geolocation.getCurrentPosition();
 
-    setCoordinates(`Current position: ${coordinates}`)
+    setCoordinates(`Current position: Long ${coordinates.coords.longitude};\nLat ${coordinates.coords.latitude};\nAlt ${coordinates.coords.altitude}`)
   
     console.log('Current position:', coordinates);
   };
