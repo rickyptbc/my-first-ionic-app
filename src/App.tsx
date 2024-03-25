@@ -36,20 +36,19 @@ import "./theme/variables.css";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import ActionSheetPage from "./pages/ActionSheetPage";
+import { LIST_PAGES } from "./routes";
 
 setupIonicReact();
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
       <IonRouterOutlet>
-        <Route exact path="/">
-          <LoginPage />
-        </Route>
-        <Route path="/register">
-          <RegisterPage />
-        </Route>
-        <Route component={HomePage} path="/app" />
-        <Route component={ActionSheetPage} path={"/feature-action-sheet"} />
+        <Route component={LoginPage} exact path="/" />
+        <Route component={RegisterPage} exact path="/register" />
+        <Route component={HomePage} path="/home" />
+        {LIST_PAGES.map((item, index) => (
+          <Route key={index} component={item.component} path={item.route} />
+        ))}
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>

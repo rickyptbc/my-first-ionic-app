@@ -69,7 +69,7 @@ const LoginPage: React.FC = () => {
       setEmail("");
       setPassword("");
       setShowPassword(false);
-      router.push("/app", "root");
+      router.push("/home", "root");
     }, 500);
   };
 
