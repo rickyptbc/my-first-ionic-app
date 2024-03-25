@@ -38,12 +38,23 @@ import RegisterPage from "./pages/RegisterPage";
 import ActionSheetPage from "./pages/ActionSheetPage";
 import { LIST_PAGES } from "./routes";
 
+interface AppProps {
+  context: {
+    startingRoute: string;
+  };
+}
+
 setupIonicReact();
-const App: React.FC = () => (
+const App: React.FC<AppProps> = ({ context }) => (
   <IonApp>
     <IonReactRouter>
       <IonRouterOutlet>
-        <Route component={LoginPage} exact path="/" />
+        {context?.startingRoute ? (
+          <Redirect to={context.startingRoute} />
+        ) : (
+          <Redirect to="/login" />
+        )}
+        <Route component={LoginPage} exact path="/login" />
         <Route component={RegisterPage} exact path="/register" />
         <Route component={HomePage} path="/home" />
         {LIST_PAGES.map((item, index) => (
