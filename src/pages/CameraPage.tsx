@@ -7,25 +7,25 @@ import {
   IonButton,
   IonImg,
 } from "@ionic/react";
-// import { Camera, CameraResultType } from "@capacitor/camera";
+import { Camera, CameraResultType } from "@capacitor/camera";
 import React, { useState } from "react";
 
 const CameraPage: React.FC = () => {
   const [imageUrl, setImageUrl] = useState<string | undefined>(undefined);
 
-  //   const takePicture = async () => {
-  //     try {
-  //       const image = await Camera.getPhoto({
-  //         quality: 90,
-  //         allowEditing: true,
-  //         resultType: CameraResultType.Uri,
-  //       });
+  const takePicture = async () => {
+    try {
+      const image = await Camera.getPhoto({
+        quality: 90,
+        allowEditing: true,
+        resultType: CameraResultType.Uri,
+      });
 
-  //       setImageUrl(image.webPath);
-  //     } catch (error) {
-  //       console.error("Error taking picture:", error);
-  //     }
-  //   };
+      setImageUrl(image.webPath);
+    } catch (error) {
+      console.error("Error taking picture:", error);
+    }
+  };
 
   return (
     <IonPage>
@@ -43,7 +43,9 @@ const CameraPage: React.FC = () => {
           />
         )}
 
-        <IonButton expand="block">Take a picture</IonButton>
+        <IonButton expand="block" onClick={takePicture}>
+          Take a picture
+        </IonButton>
       </IonContent>
     </IonPage>
   );

@@ -45,25 +45,29 @@ interface AppProps {
 }
 
 setupIonicReact();
-const App: React.FC<AppProps> = ({ context }) => (
-  <IonApp>
-    <IonReactRouter>
-      <IonRouterOutlet>
-        {context?.startingRoute ? (
-          <Redirect to={context.startingRoute} />
-        ) : (
-          <Redirect to="/" />
-        )}
-        <Route component={LoginPage} exact path="/" />
-        <Route component={RegisterPage} exact path="/register" />
-        <Route component={HomePage} path="/home" />
-        {LIST_PAGES.map((item, index) => (
-          <Route key={index} component={item.component} path={item.route} />
-        ))}
-      </IonRouterOutlet>
-    </IonReactRouter>
-  </IonApp>
-);
+const App: React.FC<AppProps> = ({ context }) => {
+  console.log(context);
+
+  return (
+    <IonApp>
+      <IonReactRouter>
+        <IonRouterOutlet>
+          {/* {context?.startingRoute ? (
+            <Redirect to={context.startingRoute} />
+          ) : (
+            <Redirect to="/" />
+          )} */}
+          <Route component={LoginPage} exact path="/" />
+          <Route component={RegisterPage} exact path="/register" />
+          <Route component={HomePage} path="/home" />
+          {LIST_PAGES.map((item, index) => (
+            <Route key={index} component={item.component} path={item.route} />
+          ))}
+        </IonRouterOutlet>
+      </IonReactRouter>
+    </IonApp>
+  );
+};
 
 // const App: React.FC = () => (
 //   <IonApp>
