@@ -11,7 +11,7 @@ import {
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import { ellipse, square, triangle } from "ionicons/icons";
-import Tab1 from "./pages/Tab1";
+import HomePage from "./pages/HomePage";
 import Tab2 from "./pages/Tab2";
 import Tab3 from "./pages/Tab3";
 
@@ -35,6 +35,7 @@ import "@ionic/react/css/display.css";
 import "./theme/variables.css";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import ActionSheetPage from "./pages/ActionSheetPage";
 
 setupIonicReact();
 const App: React.FC = () => (
@@ -47,7 +48,8 @@ const App: React.FC = () => (
         <Route path="/register">
           <RegisterPage />
         </Route>
-        <Route component={Tab1} path="/app" />
+        <Route component={HomePage} path="/app" />
+        <Route component={ActionSheetPage} path={"/feature-action-sheet"} />
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>

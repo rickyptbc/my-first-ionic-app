@@ -11,6 +11,7 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
+  useIonLoading,
   useIonRouter,
   useIonViewWillEnter,
 } from "@ionic/react";
@@ -24,11 +25,9 @@ import {
   mailOutline,
   personCircleOutline,
 } from "ionicons/icons";
-import { Geolocation } from '@capacitor/geolocation';
+import { Geolocation } from "@capacitor/geolocation";
 
 const LoginPage: React.FC = () => {
-  const [introSeen, setIntroSeen] = useState(false);
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -37,13 +36,16 @@ const LoginPage: React.FC = () => {
   const passwordRef = useRef<HTMLIonInputElement>(null);
 
   const router = useIonRouter();
+  const [present, dismiss] = useIonLoading();
 
   const printCurrentPosition = async () => {
     const coordinates = await Geolocation.getCurrentPosition();
 
-    setCoordinates(`Current position: Long ${coordinates.coords.longitude};\nLat ${coordinates.coords.latitude};\nAlt ${coordinates.coords.altitude}`)
-  
-    console.log('Current position:', coordinates);
+    setCoordinates(
+      `Current position: Long ${coordinates.coords.longitude};\nLat ${coordinates.coords.latitude};\nAlt ${coordinates.coords.altitude}`
+    );
+
+    console.log("Current position:", coordinates);
   };
 
   const togglePasswordVisibility = () => {
@@ -55,15 +57,20 @@ const LoginPage: React.FC = () => {
     printCurrentPosition();
   };
 
-  const doLogin = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const doLogin = () => {
     console.log("Logging in");
-    // Reset fields after login
-    setEmail("");
-    setPassword("");
-    setShowPassword(false);
+    present({
+      message: "Logging in...",
+    });
 
-    // router.push("/home", "root");
+    setTimeout(() => {
+      console.log("After Timeouts");
+      dismiss();
+      setEmail("");
+      setPassword("");
+      setShowPassword(false);
+      router.push("/app", "root");
+    }, 500);
   };
 
   useIonViewWillEnter(() => {
@@ -82,11 +89,9 @@ const LoginPage: React.FC = () => {
       </IonHeader>
       <IonContent>
         <IonCard>
-          <IonCardTitle>
-            {coordinates}
-          </IonCardTitle>
+          <IonCardTitle>{coordinates}</IonCardTitle>
           <IonCardContent>
-            <form onSubmit={doLogin}>
+            <form>
               <IonInput
                 type="email"
                 label="Email"
@@ -123,10 +128,11 @@ const LoginPage: React.FC = () => {
               </IonInput>
 
               <IonButton
-                routerLink="/app"
+                // routerLink="/app"
                 type="button"
                 expand="block"
                 className="ion-margin-top"
+                onClick={() => doLogin()}
               >
                 Login
                 <IonIcon icon={logInOutline} slot="end" />
