@@ -52,9 +52,9 @@ const App: React.FC<AppProps> = ({ context }) => (
         {context?.startingRoute ? (
           <Redirect to={context.startingRoute} />
         ) : (
-          <Redirect to="/login" />
+          <Redirect to="/" />
         )}
-        <Route component={LoginPage} exact path="/login" />
+        <Route component={LoginPage} exact path="/" />
         <Route component={RegisterPage} exact path="/register" />
         <Route component={HomePage} path="/home" />
         {LIST_PAGES.map((item, index) => (

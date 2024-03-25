@@ -1,4 +1,5 @@
 import ActionSheetPage from "./pages/ActionSheetPage";
+import CameraPage from "./pages/CameraPage";
 import RandomProfilePage from "./pages/RandomProfilePage";
 
 export const LIST_PAGES = [
@@ -11,5 +12,10 @@ export const LIST_PAGES = [
     title: "Random Profile (API Call)",
     route: "/random-profile",
     component: RandomProfilePage,
+  },
+  {
+    title: "Camera App",
+    route: "/camera",
+    component: CameraPage,
   },
 ];
