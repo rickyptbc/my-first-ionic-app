@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import {
   IonContent,
   IonHeader,
@@ -14,8 +15,10 @@ import {
   IonLabel,
   IonList,
   IonLoading,
+  IonRefresher,
+  IonRefresherContent,
+  RefresherEventDetail,
 } from "@ionic/react";
-import React, { useState, useEffect } from "react";
 
 const RandomProfilePage: React.FC = () => {
   const [apiData, setApiData] = useState<any>({});
@@ -38,6 +41,13 @@ const RandomProfilePage: React.FC = () => {
     }
   };
 
+  const doRefresh = (event: CustomEvent<RefresherEventDetail>) => {
+    setTimeout(() => {
+      fetchData();
+      event.detail.complete();
+    }, 1000); // Simulate delay
+  };
+
   return (
     <IonPage>
       <IonHeader>
@@ -46,6 +56,10 @@ const RandomProfilePage: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
+        <IonRefresher slot="fixed" onIonRefresh={doRefresh}>
+          <IonRefresherContent />
+        </IonRefresher>
+
         <IonHeader collapse="condense">
           <IonToolbar>
             <IonTitle size="large">My Profile</IonTitle>
@@ -55,11 +69,12 @@ const RandomProfilePage: React.FC = () => {
 
         {!isLoading && (
           <IonCard>
+            <IonCardTitle>Pull Down to Refresh</IonCardTitle>
             <IonImg src={apiData.picture?.large} alt="Profile Picture" />
             <IonCardHeader>
-              <IonCardSubtitle>{apiData.name?.title}</IonCardSubtitle>
+              <IonCardSubtitle>{apiData.login?.username}</IonCardSubtitle>
               <IonCardTitle>
-                {apiData.name?.first} {apiData.name?.last}
+                {apiData.name?.title} {apiData.name?.first} {apiData.name?.last}
               </IonCardTitle>
             </IonCardHeader>
             <IonCardContent>
@@ -106,11 +121,6 @@ const RandomProfilePage: React.FC = () => {
                   <IonLabel>
                     <strong>Timezone:</strong>
                     {apiData.location?.timezone.description}
-                  </IonLabel>
-                </IonItem>
-                <IonItem>
-                  <IonLabel>
-                    <strong>Username:</strong> {apiData.login?.username}
                   </IonLabel>
                 </IonItem>
               </IonList>
