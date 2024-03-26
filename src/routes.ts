@@ -1,5 +1,6 @@
 import ActionSheetPage from "./pages/ActionSheetPage";
 import CameraPage from "./pages/CameraPage";
+import PubSubPage from "./pages/PubSubPage";
 import RandomProfilePage from "./pages/RandomProfilePage";
 
 export const LIST_PAGES = [
@@ -17,5 +18,10 @@ export const LIST_PAGES = [
     title: "Camera App",
     route: "/camera",
     component: CameraPage,
+  },
+  {
+    title: "PubSub Test Page",
+    route: "/pubsub",
+    component: PubSubPage,
   },
 ];
