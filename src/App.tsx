@@ -52,11 +52,22 @@ const App: React.FC<AppProps> = ({ context }) => {
     <IonApp>
       <IonReactRouter>
         <IonRouterOutlet>
-          {context?.startingRoute ? (
+          {/* {context?.startingRoute ? (
             <Redirect to={context.startingRoute} />
           ) : (
             <Redirect to="/" />
-          )}
+          )} */}
+
+          {context?.startingRoute ? (
+            <Route exact path="/">
+              {context.startingRoute === "/" ? (
+                <LoginPage />
+              ) : (
+                <Redirect to={context.startingRoute} />
+              )}
+            </Route>
+          ) : null}
+
           <Route component={LoginPage} exact path="/" />
           <Route component={RegisterPage} exact path="/register" />
           <Route component={HomePage} path="/home" />

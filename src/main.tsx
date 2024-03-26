@@ -15,3 +15,15 @@ root.render(
   <App context={initialContext} />
   // </React.StrictMode>
 );
+
+// import { getInitialContext } from "@ionic/portals";
+
+// const context = getInitialContext<{ startingRoute: string }>();
+
+// ReactDOM.render(
+//   <React.StrictMode>
+//     <App context={context!.value} />
+//     {/* context.value = { startingRoute: '/help' } */}
+//   </React.StrictMode>,
+//   document.getElementById("root")
+// );
