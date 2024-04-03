@@ -7,6 +7,7 @@ import {
   IonTabBar,
   IonTabButton,
   IonTabs,
+  IonToast,
   setupIonicReact,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
@@ -35,29 +36,51 @@ import "@ionic/react/css/display.css";
 import "./theme/variables.css";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
-import ActionSheetPage from "./pages/ActionSheetPage";
 import { LIST_PAGES } from "./routes";
+import { useEffect, useState } from "react";
 
 interface AppProps {
-  context: {
+  context?: {
     startingRoute: string;
   };
 }
 
 setupIonicReact();
 const App: React.FC<AppProps> = ({ context }) => {
-  console.log(context);
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
+
+  useEffect(() => {
+    if (toastMessage) {
+      setShowToast(true);
+    }
+  }, [toastMessage]);
+
+  useEffect(() => {
+    console.log(`Inside useEffect []`);
+
+    if (!context) {
+      console.log(`Inside useEffect [] 1`);
+      const defaultContext = { startingRoute: "/" };
+      console.log(
+        `Context is undefined, defaulting to ${JSON.stringify(defaultContext)}`
+      );
+      context = defaultContext;
+      setToastMessage(
+        `App Component received defaulted context: ${JSON.stringify(context)}`
+      );
+    } else {
+      console.log(`App Component received context: ${JSON.stringify(context)}`);
+      setToastMessage(
+        `App Component received context: ${JSON.stringify(context)}`
+      );
+    }
+  }, []);
 
   return (
     <IonApp>
       <IonReactRouter>
         <IonRouterOutlet>
-          {/* {context?.startingRoute ? (
-            <Redirect to={context.startingRoute} />
-          ) : (
-            <Redirect to="/" />
-          )} */}
-
           {context?.startingRoute ? (
             <Route exact path="/">
               {context.startingRoute === "/" ? (
@@ -68,7 +91,6 @@ const App: React.FC<AppProps> = ({ context }) => {
             </Route>
           ) : null}
 
-          <Route component={LoginPage} exact path="/" />
           <Route component={RegisterPage} exact path="/register" />
           <Route component={HomePage} path="/home" />
           {LIST_PAGES.map((item, index) => (
@@ -76,6 +98,16 @@ const App: React.FC<AppProps> = ({ context }) => {
           ))}
         </IonRouterOutlet>
       </IonReactRouter>
+
+      <IonToast
+        isOpen={showToast}
+        onDidDismiss={() => {
+          setShowToast(false);
+          setToastMessage("");
+        }}
+        message={toastMessage}
+        duration={2000} // Adjust duration as needed
+      />
     </IonApp>
   );
 };
