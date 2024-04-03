@@ -57,17 +57,14 @@ const App: React.FC<AppProps> = ({ context }) => {
   }, [toastMessage]);
 
   useEffect(() => {
-    console.log(`Inside useEffect []`);
-
     if (!context) {
-      console.log(`Inside useEffect [] 1`);
       const defaultContext = { startingRoute: "/" };
       console.log(
         `Context is undefined, defaulting to ${JSON.stringify(defaultContext)}`
       );
       context = defaultContext;
       setToastMessage(
-        `App Component received defaulted context: ${JSON.stringify(context)}`
+        `Context is undefined, defaulting to ${JSON.stringify(context)}`
       );
     } else {
       console.log(`App Component received context: ${JSON.stringify(context)}`);

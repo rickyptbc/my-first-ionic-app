@@ -25,36 +25,25 @@ import {
   mailOutline,
   personCircleOutline,
 } from "ionicons/icons";
-import { Geolocation } from "@capacitor/geolocation";
+import { Haptics } from "@capacitor/haptics";
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [coordinates, setCoordinates] = useState(`Current position: -`);
 
   const passwordRef = useRef<HTMLIonInputElement>(null);
 
   const router = useIonRouter();
   const [present, dismiss] = useIonLoading();
 
-  const printCurrentPosition = async () => {
-    const coordinates = await Geolocation.getCurrentPosition();
-
-    setCoordinates(
-      `Current position: Long ${coordinates.coords.longitude};\nLat ${coordinates.coords.latitude};\nAlt ${coordinates.coords.altitude}`
-    );
-
-    console.log("Current position:", coordinates);
-  };
-
   const togglePasswordVisibility = () => {
+    Haptics.vibrate();
     setShowPassword(!showPassword);
     // Focus on the password field after toggling show/hide
     if (passwordRef.current) {
       passwordRef.current.setFocus();
     }
-    printCurrentPosition();
   };
 
   const doLogin = () => {
@@ -89,7 +78,6 @@ const LoginPage: React.FC = () => {
       </IonHeader>
       <IonContent>
         <IonCard>
-          <IonCardTitle>{coordinates}</IonCardTitle>
           <IonCardContent>
             <form>
               <IonInput

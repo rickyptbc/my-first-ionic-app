@@ -64,11 +64,6 @@ const PubSubPage: React.FC = () => {
 
       console.log(`Subscribing to topic(${topicToSub})`);
 
-      // let subscriptionHandle:
-      //   | Promise<void | PluginListenerHandle>
-      //   | undefined
-      //   | PluginListenerHandle;
-
       subscribe(topicToSub, (message) => {
         console.log(`Topic '${topicToSub}' received msg '${message}'`);
         const data = message.data as PortalMessageData;
@@ -90,8 +85,6 @@ const PubSubPage: React.FC = () => {
         .catch((error) => {
           console.error(`Error subscribing to topic(${topicToSub})`, error);
         });
-
-      // Optionally, you can save the subscription handle in the component's state
     }
   };
 

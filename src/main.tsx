@@ -7,8 +7,8 @@ const oriInitConx = getInitialContext<{ startingRoute: string }>()?.value;
 // const oriInitConx = { startingRoute: "/feature-action-sheet" };
 // const oriInitConx = { startingRoute: "/pubsub" };
 
-// const initialContext = oriInitConx ?? { startingRoute: "/" };
+const initialContext = oriInitConx ?? { startingRoute: "/" };
 
 const container = document.getElementById("root");
 const root = createRoot(container!);
-root.render(<App context={oriInitConx} />);
+root.render(<App context={initialContext} />);
