@@ -65,7 +65,9 @@ const PubSubPage: React.FC = () => {
       console.log(`Subscribing to topic(${topicToSub})`);
 
       subscribe(topicToSub, (message) => {
-        console.log(`Topic '${topicToSub}' received msg '${message}'`);
+        console.log(
+          `Topic '${topicToSub}' received msg '${JSON.stringify(message)}'`
+        );
         const data = message.data as PortalMessageData;
         setReceivedMessages((prevMessages) => [
           ...prevMessages,
