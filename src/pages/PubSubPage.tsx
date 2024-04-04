@@ -15,9 +15,9 @@ import {
 import { publish, subscribe } from "@ionic/portals";
 import { PluginListenerHandle } from "@capacitor/core";
 
-interface PortalMessageData {
-  message: string;
-}
+// interface PortalMessageData {
+//   message: string;
+// }
 
 const PubSubPage: React.FC = () => {
   const [textLog, setTextLog] = useState("Published Message will appear here");
@@ -68,13 +68,13 @@ const PubSubPage: React.FC = () => {
         console.log(
           `Topic '${topicToSub}' received msg '${JSON.stringify(message)}'`
         );
-        const data = message.data as PortalMessageData;
+        const data = message.data; //as PortalMessageData;
         setReceivedMessages((prevMessages) => [
           ...prevMessages,
           {
             timestamp: new Date().toLocaleString(),
             topic: topicToSub,
-            msg: data.message,
+            msg: data,
           },
         ]);
       })
