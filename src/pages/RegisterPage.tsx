@@ -50,7 +50,7 @@ const RegisterPage: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar color="primary">
+        <IonToolbar color="teryiary">
           <IonButtons slot="start">
             <IonBackButton defaultHref="/" />
           </IonButtons>
