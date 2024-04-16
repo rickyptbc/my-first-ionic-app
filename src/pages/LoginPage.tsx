@@ -72,7 +72,7 @@ const LoginPage: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar color="success">
+        <IonToolbar color="danger">
           <IonTitle>Login</IonTitle>
         </IonToolbar>
       </IonHeader>
